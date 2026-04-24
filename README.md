@@ -1,84 +1,75 @@
-# Graph Analyzer - Full Stack Project
+# Graph Analyzer
 
-## Overview
-A full stack web application to process hierarchical node relationships and return structured insights. Built with Node.js/Express (Backend) and React (Frontend).
+Full-stack graph analysis application with a Next.js frontend and Express backend.
 
-## Features
-- Directed Graph validation, duplicate and multi-parent handling.
-- Tree and Cycle components detection.
-- Longest path (depth) calculation.
-- Responsive, modern React dark-mode UI with Vite and Tailwind CSS.
-- RESTful JSON API.
+## Live Deployment
 
-## Requirements
-- Node.js LTS
-- npm
+- Frontend: https://graph-analyzer-bajaj.vercel.app/
+- Backend: https://punitjoshi-bfhl.onrender.com
 
-## Folder Structure
-```
-.
-├── backend
-│   ├── index.js      # Main Express API Server
-│   ├── package.json  # Dependencies (express, cors)
-├── frontend
-│   ├── src
-│   │   ├── App.jsx   # Main React component
-│   │   ├── index.css # Tailwind & UI CSS
-│   │   └── main.jsx  # React bootstrapper
-│   ├── index.html    # Vite entry HTML
-│   ├── vite.config.js# Vite + Tailwind compiler setup
-│   └── package.json  # Frontend Dependencies
-└── README.md
-```
+## What It Does
 
-## Running the app locally
+- Accepts directed edges in format like A->B
+- Validates invalid and duplicate inputs
+- Builds hierarchy trees for valid components
+- Detects cyclic components
+- Shows summary metrics and raw JSON output
 
-**1. Start the Backend:**
-```bash
-cd backend
+## Repository Structure
+
+- backend: Express API server
+- frontend-next: Next.js user interface
+
+## Local Setup
+
+### 1. Start Backend
+
+From the backend folder:
+
 npm install
 npm start
-```
 
-**2. Start the Frontend:**
-```bash
-# In a new terminal
-cd frontend
+Backend runs on port 4000 by default.
+
+### 2. Start Frontend
+
+From the frontend-next folder:
+
 npm install
 npm run dev
-```
 
-Open `http://localhost:5173/` in your browser.
+Frontend runs on port 3000 by default.
 
-## Sample Test Cases
+## Frontend Environment Variable
 
-**Test Case 1: Valid Normal Tree**
-Input: `A->B, A->C, B->D`
-Expect: 1 valid tree, Depth 3, Root A
+Create frontend-next/.env.local and set:
 
-**Test Case 2: Handled Errors & Duplicates**
-Input: `A->B, hello, A-b, A->B, B->D, 1->2`
-Expect: Tree Depth 3 Root A. Invalid: hello, A-b, 1->2. Duplicate: A->B.
+NEXT_PUBLIC_API_URL=http://localhost:4000
 
-**Test Case 3: Cycles**
-Input: `A->B, B->C, C->A`
-Expect: 1 Cycle, Largest Root: -, depth: null
+For deployed usage, set:
 
-**Test Case 4: Multiple Trees with multi-parent handling**
-Input: `A->B, C->B, F->G`
-Expect: 
-- Two trees: Root A (B receives parent A, C->B ignored), Root F.
-- Largest Tree Root: A (Tie broken by lex min)
+NEXT_PUBLIC_API_URL=https://punitjoshi-bfhl.onrender.com
 
-## Deployment Instructions
+## API Endpoint
 
-### Backend (Render/Vercel)
-- Create a new web service on Render pointing to the `/backend` folder.
-- Ensure the start command is `node index.js`.
-- It will automatically bind to `process.env.PORT`.
+Base URL:
 
-### Frontend (Vercel)
-- Create a new project on Vercel importing the `/frontend` folder.
-- Build command: `npm run build`
-- Output directory: `dist`
-- Change `http://localhost:4000/bfhl` in `App.jsx` to your backend deployed URL.
+- Local: http://localhost:4000
+- Deployed: https://punitjoshi-bfhl.onrender.com
+
+Route:
+
+POST /bfhl
+
+Content-Type must be application/json.
+
+Example request body:
+
+{
+	"data": ["A->B", "A->C", "B->D"]
+}
+
+## Deployed App Links
+
+- Frontend App: https://graph-analyzer-bajaj.vercel.app/
+- Backend API: https://punitjoshi-bfhl.onrender.com
