@@ -210,13 +210,19 @@ export default function Page() {
                   <button
                     type="submit"
                     disabled={loading || !inputText.trim()}
-                    className="w-full bg-cyan-400 hover:bg-cyan-300 disabled:bg-white/10 disabled:text-white/60 text-slate-950 font-semibold py-2.5 sm:py-3 px-5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed text-sm sm:text-base shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 active:scale-[0.98]"
+                    className="w-full bg-cyan-400 hover:bg-cyan-300 
+                               disabled:bg-white/10 disabled:text-white/60
+                               text-slate-950 font-semibold py-2.5 sm:py-3 px-5 rounded-xl 
+                               transition-all duration-200 flex items-center justify-center gap-2 
+                               cursor-pointer disabled:cursor-not-allowed 
+                               text-sm sm:text-base shadow-lg shadow-cyan-500/10 
+                               hover:shadow-cyan-500/20 active:scale-[0.98]"
                   >
                     {loading
-                      ? <div className="w-5 h-5 spinner" />
+                      ? <div className="w-5 h-5 spinner border-white" />
                       : <><Send className="w-4 h-4" />Analyze</>
                     }
-                  </button>
+                </button>
                 </form>
 
                 {/* Error */}
